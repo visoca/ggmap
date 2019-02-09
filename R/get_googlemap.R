@@ -397,7 +397,10 @@ get_googlemap <- function(
   	map <- gray(.30 * map[,,1] + .59 * map[,,2] + .11 * map[,,3])
   	dim(map) <- mapd[1:2]
   }
-
+  
+  # Fix scale size isues when size is non-square
+  map <- matrix(map, nrow = scale*size[2], ncol = scale*size[1])
+                         
   # map spatial info
   if(is.character(center)) center <- as.numeric(geocode(center, source = "google"))
 
